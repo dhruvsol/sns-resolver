@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { User } from '@prisma/client';
 import { z } from 'zod';
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc';
 import { prisma } from '~/server/db';
@@ -21,7 +20,7 @@ export const userRouter = createTRPCRouter({
           publickey: input.publickey,
           signature: input.signature,
         },
-      })) as User;
+      }));
 
       return res ?? null;
     }),
