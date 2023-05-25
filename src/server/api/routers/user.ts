@@ -11,6 +11,7 @@ export const userRouter = createTRPCRouter({
         domain: z.string(),
         publickey: z.string(),
         signature: z.string(),
+        redirect: z.string(),
       })
     )
     .mutation(async ({ input }) => {
@@ -20,6 +21,7 @@ export const userRouter = createTRPCRouter({
           domain: input.domain,
           publickey: input.publickey,
           signature: input.signature,
+          redirect: input.redirect,
         },
       })) as User;
 
