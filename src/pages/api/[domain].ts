@@ -17,7 +17,7 @@ export default async function handler(
       },
     });
     if (resUser) {
-      return res.redirect(resUser?.redirect as string).status(200);
+      return res.redirect(resUser?.redirect).status(200);
     }
 
     return res.status(404).json({ error: 'User not found' });
