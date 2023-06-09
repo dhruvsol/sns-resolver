@@ -7,7 +7,7 @@ export const Navbar = () => {
       align="center"
       p="0 3rem"
       borderBottom="1px solid"
-      borderColor="#B9B8FF"
+      borderColor="#353462"
       height="55px"
       w="100vw"
       justify="space-between"
@@ -16,16 +16,17 @@ export const Navbar = () => {
       <Text
         fontWeight={700}
         fontSize="21px"
-        color="#7C89FF">
+        color="#605EB2">
         SOL RESOLVER
       </Text>
 
       <Button
-        color="#AEADE1"
-        borderColor="#AEADE1"
+        color="#605EB2"
+        borderColor="#353462"
         border="2px solid"
         background="none"
         borderRadius="20px"
+        _hover={{background:"transparent"}}
         w="150px"
       >ENTER APP</Button>
     </Flex>
