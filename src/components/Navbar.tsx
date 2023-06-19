@@ -1,6 +1,12 @@
-import { Button, Flex, Text } from "@chakra-ui/react"
+import { Flex, Text } from '@chakra-ui/react';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export const Navbar = () => {
+  const { connected, publicKey } = useWallet();
+  const router = useRouter();
 
   return (
     <Flex
@@ -13,22 +19,11 @@ export const Navbar = () => {
       justify="space-between"
       boxShadow="0px 4px 39px rgba(0, 0, 0, 0.1)"
     >
-      <Text
-        fontWeight={700}
-        fontSize="21px"
-        color="#605EB2">
+      <Text fontWeight={700} fontSize="21px" color="#605EB2">
         SOL RESOLVER
       </Text>
 
-      <Button
-        color="#605EB2"
-        borderColor="#353462"
-        border="2px solid"
-        background="none"
-        borderRadius="20px"
-        _hover={{background:"transparent"}}
-        w="150px"
-      >ENTER APP</Button>
+      <WalletMultiButton></WalletMultiButton>
     </Flex>
-  )
-}
+  );
+};

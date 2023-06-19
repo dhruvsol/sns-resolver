@@ -1,20 +1,18 @@
-import { type AppType } from "next/app";
-import { api } from "~/utils/api";
-import { ChakraProvider } from '@chakra-ui/react'
-import "~/styles/globals.css";
-import { Wallet } from "~/context/walletContext";
+import { type AppType } from 'next/app';
+import { api } from '~/utils/api';
+import { ChakraProvider } from '@chakra-ui/react';
+import '~/styles/globals.css';
+import { Wallet } from '~/context/walletContext';
 
+require('@solana/wallet-adapter-react-ui/styles.css');
 const MyApp: AppType = ({ Component, pageProps }) => {
-
-
   return (
-    <Wallet>
-      <ChakraProvider>
+    <ChakraProvider>
+      <Wallet>
         <Component {...pageProps} />
-      </ChakraProvider>
-    </Wallet>
-  )
-
+      </Wallet>
+    </ChakraProvider>
+  );
 };
 
 export default api.withTRPC(MyApp);
