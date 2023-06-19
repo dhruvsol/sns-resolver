@@ -9,20 +9,18 @@ export const userRouter = createTRPCRouter({
       z.object({
         domain: z.string(),
         publickey: z.string(),
-        signature: z.string(),
         redirect: z.string(),
       })
     )
     .mutation(async ({ input }) => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-      const res = (await prisma.user.create({
+      const res = await prisma.user.create({
         data: {
           domain: input.domain,
           publickey: input.publickey,
-          signature: input.signature,
           redirect: input.redirect,
         },
-      }));
+      });
 
       return res ?? null;
     }),
@@ -41,6 +39,42 @@ export const userRouter = createTRPCRouter({
         },
       });
 
+      return res;
+    }),
+
+  getAll: publicProcedure
+    .input(
+      z.object({
+        wallet: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      if (input.wallet === '') return null;
+      const res = await prisma.user.findMany({
+        where: {
+          publickey: input.wallet,
+        },
+      });
+
+      return res;
+    }),
+
+  update: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        redirect: z.string(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const res = await prisma.user.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          redirect: input.redirect,
+        },
+      });
       return res;
     }),
 });
