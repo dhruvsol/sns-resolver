@@ -1,6 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import { Box, Flex, Spinner, Text, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Spinner,
+  Table,
+  TableCaption,
+  TableContainer,
+  Tbody,
+  Td,
+  Text,
+  Tfoot,
+  Th,
+  Thead,
+  Tr,
+  VStack,
+} from '@chakra-ui/react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { type NextPage } from 'next';
 import { useEffect, useState } from 'react';
@@ -40,6 +55,7 @@ const Create: NextPage = () => {
       <>
         <Navbar />
         <Flex
+          bg="#5CDB95"
           display={'flex'}
           justify={'center'}
           align={'center'}
@@ -58,6 +74,7 @@ const Create: NextPage = () => {
       <>
         <Navbar />
         <Flex
+          bg="#5CDB95"
           display={'flex'}
           justify={'center'}
           align={'center'}
@@ -68,7 +85,7 @@ const Create: NextPage = () => {
             justifyContent={'center'}
             align={'center'}
             flexDirection={'column'}
-            color="#595877"
+            color="#05386B"
             fontSize="2xl"
             fontWeight={600}
           >
@@ -87,38 +104,65 @@ const Create: NextPage = () => {
     <>
       <DefaultHead />
       <Navbar />
-      {userNames?.length === 0 ? (
-        <Flex
-          display={'flex'}
-          justify={'center'}
-          align={'center'}
-          minH={'100vh'}
-        >
-          <Text color="#595877" fontSize="2xl" fontWeight={600}>
-            No Domains Found
-          </Text>
-        </Flex>
-      ) : (
-        <VStack minH="100vh" maxW="7xl" mx="auto" align="start" py={5}>
-          <Text color="#595877" fontSize="2xl" fontWeight={600}>
-            Your Domains
-          </Text>
-          <Flex wrap={'wrap'} justify="space-between" gap={5}>
-            {userNames?.map((name) => {
-              return (
-                <Card
-                  domain={name}
-                  type="SNS"
-                  id={getAll.data?.find((e) => e.domain === name)?.id}
-                  redirect={
-                    getAll.data?.find((e) => e.domain === name)?.redirect ?? ''
-                  }
-                />
-              );
-            })}
+      <Flex bg="#5CDB95" w={'full'} minH={'100vh'}>
+        {userNames?.length === 0 ? (
+          <Flex
+            display={'flex'}
+            justify={'center'}
+            align={'center'}
+            minH={'100vh'}
+          >
+            <Text color="#595877" fontSize="2xl" fontWeight={600}>
+              No Domains Found
+            </Text>
           </Flex>
-        </VStack>
-      )}
+        ) : (
+          <VStack
+            minH="100vh"
+            w={'full'}
+            maxW="7xl"
+            mx="auto"
+            align="start"
+            py={5}
+            px={5}
+          >
+            <Text color="#05386B" fontSize="2xl" fontWeight={600}>
+              Your Domains
+            </Text>
+            <Flex wrap={'wrap'} w={'full'} justify="space-between" gap={5}>
+              <TableContainer bg={'white'} w={'full'}>
+                <Table>
+                  <Thead>
+                    <Tr>
+                      <Th>Sr</Th>
+                      <Th>Domain</Th>
+                      <Th>Redirect URL</Th>
+                      <Th>Copy</Th>
+                      <Th>Config</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {userNames?.map((name, index) => {
+                      return (
+                        <Card
+                          domain={name}
+                          type="SNS"
+                          index={index}
+                          id={getAll.data?.find((e) => e.domain === name)?.id}
+                          redirect={
+                            getAll.data?.find((e) => e.domain === name)
+                              ?.redirect ?? ''
+                          }
+                        />
+                      );
+                    })}
+                  </Tbody>
+                </Table>
+              </TableContainer>
+            </Flex>
+          </VStack>
+        )}
+      </Flex>
     </>
   );
 };

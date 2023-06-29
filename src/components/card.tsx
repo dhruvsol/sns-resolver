@@ -15,6 +15,8 @@ import {
   Input,
   useToast,
   useClipboard,
+  Tr,
+  Td,
 } from '@chakra-ui/react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useRouter } from 'next/router';
@@ -27,9 +29,10 @@ interface Props {
   domain: string;
   redirect?: string;
   id?: string;
+  index: number;
 }
 
-const Card = ({ domain, type, redirect, id }: Props) => {
+const Card = ({ domain, type, redirect, id, index }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { publicKey } = useWallet();
   const toast = useToast();
@@ -58,92 +61,75 @@ const Card = ({ domain, type, redirect, id }: Props) => {
   } = useDisclosure();
   return (
     <>
-      <Box border="2px solid #DFE2FF" h="13rem" w="23rem" rounded="2xl">
-        <Box
-          bg="#7367FE"
-          w={'max-content'}
-          mx={'0.5px'}
-          my={'0.5px'}
-          py={1}
-          px={3}
-          roundedTopLeft={'xl'}
-          roundedBottomRight={'xl'}
-          color={'#FFFFFF'}
-          fontSize={'sm'}
-          fontWeight={800}
-        >
-          {type}
-        </Box>
-        <VStack>
-          <Text color="#5A5975" fontSize="2xl" fontWeight={700}>
-            {domain}
-          </Text>
+      <Tr>
+        <Td>{index + 1}.</Td>
+
+        <Td>
+          <Text>{domain}</Text>
+        </Td>
+        <Td>
           {redirect ? (
-            <Text color="#83869C" fontSize="lg" fontWeight={700}>
+            <Text>
               {redirect !== '' && redirect?.length! < 35
                 ? redirect
                 : redirect?.substring(0, 30) + '...'}
             </Text>
           ) : (
-            <Text color="#83869C" fontSize="lg" fontWeight={700}>
-              {'No redirect yet'}
-            </Text>
+            <Text>{'No redirect yet'}</Text>
           )}
-          <Box pt={7}>
-            {redirect ? (
-              <>
-                <HStack gap={8}>
-                  <Button
-                    _hover={{
-                      bg: '#7367FE',
-                      color: '#FFFFFF',
-                    }}
-                    bg="#7367FE"
-                    color="#FFFFFF"
-                    onClick={() => {
-                      onCopy();
-                      toast({
-                        title: 'Copied.',
-                        description: 'Link copied to clipboard',
-                        status: 'success',
-                        duration: 3000,
-                        isClosable: true,
-                      });
-                    }}
-                  >
-                    Copy
-                  </Button>
-                  <Button
-                    _hover={{
-                      bg: '#7367FE',
-                      color: '#FFFFFF',
-                    }}
-                    bg="#7367FE"
-                    color="#FFFFFF"
-                    onClick={editOnOpen}
-                  >
-                    Edit
-                  </Button>
-                </HStack>
-              </>
-            ) : (
-              <>
-                <Button
-                  _hover={{
-                    bg: '#7367FE',
-                    color: '#FFFFFF',
-                  }}
-                  bg="#7367FE"
-                  color="#FFFFFF"
-                  onClick={onOpen}
-                >
-                  Set redirect
-                </Button>
-              </>
-            )}
-          </Box>
-        </VStack>
-      </Box>
+        </Td>
+        <Td>
+          <Button
+            _hover={{
+              bg: '#05386B',
+              color: '#FFFFFF',
+            }}
+            bg="#05386B"
+            color="#FFFFFF"
+            onClick={() => {
+              onCopy();
+              toast({
+                title: 'Copied.',
+                description: 'Link copied to clipboard',
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+              });
+            }}
+          >
+            Copy
+          </Button>
+        </Td>
+
+        <Td>
+          {!redirect ? (
+            <Button
+              _hover={{
+                bg: '#05386B',
+                color: '#FFFFFF',
+              }}
+              bg="#05386B"
+              color="#FFFFFF"
+              onClick={onOpen}
+            >
+              Set redirect
+            </Button>
+          ) : (
+            <Button
+              _hover={{
+                bg: '#05386B',
+                color: '#FFFFFF',
+              }}
+              bg="#05386B"
+              color="#FFFFFF"
+              onClick={editOnOpen}
+            >
+              Edit
+            </Button>
+          )}
+        </Td>
+      </Tr>
+
       {isOpen && (
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
@@ -162,10 +148,10 @@ const Card = ({ domain, type, redirect, id }: Props) => {
             <ModalFooter>
               <Button
                 mr={3}
-                bg={'#7367FE'}
+                bg={'#05386B'}
                 color={'white'}
                 _hover={{
-                  bg: '#7367FE',
+                  bg: '#05386B',
                   color: '#FFFFFF',
                 }}
                 isLoading={addRedirectMutation.isLoading}
@@ -204,10 +190,10 @@ const Card = ({ domain, type, redirect, id }: Props) => {
             <ModalFooter>
               <Button
                 mr={3}
-                bg={'#7367FE'}
+                bg={'#05386B'}
                 color={'white'}
                 _hover={{
-                  bg: '#7367FE',
+                  bg: '#05386B',
                   color: '#FFFFFF',
                 }}
                 isLoading={updateRedirectMutation.isLoading}

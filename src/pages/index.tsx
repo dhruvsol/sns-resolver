@@ -1,6 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import { Button, Flex, Grid, Text, useMediaQuery } from '@chakra-ui/react';
+import {
+  Button,
+  Container,
+  Flex,
+  Grid,
+  Text,
+  useMediaQuery,
+} from '@chakra-ui/react';
 import { type NextPage } from 'next';
 import Image from 'next/image';
 import { DefaultHead } from '~/components/DefaultHead';
@@ -9,24 +16,69 @@ import HomePageIcon from '~/imgs/homepage_icon.svg';
 import Flow from '~/imgs/flow.svg';
 import BottomGlow from '~/imgs/bottomglow.svg';
 import { useRouter } from 'next/router';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 const Home: NextPage = () => {
   const [smallSize] = useMediaQuery('(min-width: 1500px)');
   const router = useRouter();
+  const { publicKey } = useWallet();
+
   return (
     <>
       <DefaultHead />
       <Navbar />
 
-      <Grid minH={'100vh'} mb="2rem" placeContent="center">
-        <Flex
-          my="7rem"
-          flexFlow={smallSize ? 'row' : 'column'}
-          align={smallSize ? 'end' : 'start'}
-          gap="2rem"
-          zIndex={10}
-        >
-          <Flex flexFlow="column" maxW="1000px" gap="2rem">
+      <Flex bg="#5CDB95" minH={'100vh'} mb="2rem">
+        <Container maxW="7xl" py={20}>
+          <Flex gap="2rem">
+            <Flex w={'full'} h={'full'} gap={8} flexDir={'column'}>
+              <Flex alignItems={'start'} justifyContent={'start'}>
+                <Text color="white" fontWeight={700} fontSize={'7xl'}>
+                  Connect Your <br /> Solana Domain <br /> to Any Destination
+                </Text>
+              </Flex>
+              <Flex w={'14rem'} h={'3rem'}>
+                {publicKey ? (
+                  <>
+                    <Button
+                      color={'white'}
+                      w={'full'}
+                      h={'full'}
+                      bg={'#05386B'}
+                      _hover={{
+                        bg: '#05386B9A',
+                      }}
+                      onClick={() => {
+                        router.push('/create/new');
+                      }}
+                    >
+                      Create A Link
+                    </Button>
+                  </>
+                ) : (
+                  <WalletMultiButton
+                    style={{
+                      color: 'white',
+                      background: '#05386B',
+                      width: '100%',
+                      height: '100%',
+                    }}
+                  >
+                    Get Started
+                  </WalletMultiButton>
+                )}
+              </Flex>
+            </Flex>
+            <Image
+              src={Flow}
+              alt="Icon"
+              style={{
+                zIndex: 0,
+              }}
+            />
+          </Flex>
+          {/* <Flex flexFlow="column" maxW="1000px" gap="2rem">
             <Text
               fontSize="70px"
               color="#9694FF"
@@ -77,18 +129,10 @@ const Home: NextPage = () => {
             >
               Get Started
             </Button>
-          </Flex>
-
-          <Image
-            src={Flow}
-            alt="Icon"
-            style={{
-              zIndex: 0,
-            }}
-          />
-        </Flex>
-      </Grid>
-      <Image
+          </Flex> */}
+        </Container>
+      </Flex>
+      {/* <Image
         src={BottomGlow}
         alt="Icon"
         style={{
@@ -97,7 +141,7 @@ const Home: NextPage = () => {
           width: '100vw',
           zIndex: 0,
         }}
-      />
+      /> */}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Container, Flex, Text } from '@chakra-ui/react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useRouter } from 'next/router';
@@ -10,20 +10,32 @@ export const Navbar = () => {
 
   return (
     <Flex
-      align="center"
-      p="0 3rem"
-      borderBottom="1px solid"
-      borderColor="#353462"
-      height="55px"
+      height="max-content"
+      py={6}
       w="100vw"
-      justify="space-between"
+      bg={'#5CDB95'}
+      align={'center'}
+      justify={'space-between'}
       boxShadow="0px 4px 39px rgba(0, 0, 0, 0.1)"
     >
-      <Text fontWeight={700} fontSize="21px" color="#605EB2">
-        SOL RESOLVER
-      </Text>
+      <Container
+        display={'flex'}
+        justifyContent={'space-between'}
+        alignItems={'center'}
+        maxW="7xl"
+        h="100%"
+      >
+        <Text fontWeight={700} fontSize="21px" color="#05386B">
+          SOL RESOLVER
+        </Text>
 
-      <WalletMultiButton></WalletMultiButton>
+        <WalletMultiButton
+          style={{
+            color: 'white',
+            background: '#05386B',
+          }}
+        ></WalletMultiButton>
+      </Container>
     </Flex>
   );
 };
