@@ -17,6 +17,8 @@
     "@chakra-ui/react": "^2.6.1",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@lottiefiles/lottie-player": "^2.0.2",
+    "@lottiefiles/react-lottie-player": "^3.5.3",
     "@portal-payments/solana-wallet-names": "^2.0.4",
     "@prisma/client": "^4.14.0",
     "@solana/wallet-adapter-base": "^0.9.22",

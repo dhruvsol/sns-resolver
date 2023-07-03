@@ -29,7 +29,7 @@ const Home: NextPage = () => {
       <DefaultHead />
       <Navbar />
 
-      <Flex bg="#5CDB95" minH={'100vh'} mb="2rem">
+      <Flex bg="#0C0C0F" minH={'100vh'} mb="2rem">
         <Container maxW="7xl" py={20}>
           <Flex gap="2rem">
             <Flex w={'full'} h={'full'} gap={8} flexDir={'column'}>
