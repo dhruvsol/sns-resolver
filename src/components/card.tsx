@@ -149,25 +149,78 @@ const Card = ({ domain, type, redirect, id, index }: Props) => {
       {isOpen && (
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Add Redirect for {domain}</ModalHeader>
+          <ModalContent
+            h={'max-content'}
+            bg={'#141417'}
+            boxShadow={'0px 4px 96px 0px rgba(0, 0, 0, 0.24)'}
+            backdropFilter={'blur(20px)'}
+            border={'1px solid rgba(105, 92, 255, 0.08)'}
+          >
+            <ModalHeader color={'white'}>Add Redirect link</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Input
-                onChange={(e) => {
-                  setRedirectUrl(e.target.value);
-                }}
-                placeholder="Redirect URL"
-              />
+              <HStack justify={'start'} gap={7} mb={7}>
+                <VStack gap={'0px'} spacing={'0'} align={'start'}>
+                  <Text
+                    fontSize={'xs'}
+                    color={'#78787F'}
+                    textTransform={'uppercase'}
+                  >
+                    Domain Name
+                  </Text>
+                  <Text p={0} fontSize={'md'} color={'white'}>
+                    {domain}
+                  </Text>
+                </VStack>
+                <VStack gap={'0px'} spacing={'0'} align={'start'}>
+                  <Text
+                    fontSize={'xs'}
+                    color={'#78787F'}
+                    textTransform={'uppercase'}
+                  >
+                    Provider
+                  </Text>
+                  <Text p={0} fontSize={'md'} color={'white'}>
+                    SNS
+                  </Text>
+                </VStack>
+              </HStack>
+              <VStack gap={1} align={'start'}>
+                <Text
+                  textTransform={'uppercase'}
+                  color={'#78787F'}
+                  fontSize={'sm'}
+                >
+                  destination link
+                </Text>
+                <Input
+                  border={'1px solid #78787F'}
+                  onChange={(e) => {
+                    setRedirectUrl(e.target.value);
+                  }}
+                  placeholder="Redirect URL"
+                />
+              </VStack>
             </ModalBody>
 
             <ModalFooter>
               <Button
+                color={'#78787F'}
+                _hover={{
+                  bg: 'transparent',
+                  color: '#78787F',
+                }}
+                variant="ghost"
+                onClick={onClose}
+              >
+                Close
+              </Button>
+              <Button
                 mr={3}
-                bg={'#05386B'}
+                bg={'#695CFF'}
                 color={'white'}
                 _hover={{
-                  bg: '#05386B',
+                  bg: '#695CFF',
                   color: '#FFFFFF',
                 }}
                 isLoading={addRedirectMutation.isLoading}
@@ -179,10 +232,7 @@ const Card = ({ domain, type, redirect, id, index }: Props) => {
                   });
                 }}
               >
-                Add
-              </Button>
-              <Button variant="ghost" onClick={onClose}>
-                Close
+                Add Link
               </Button>
             </ModalFooter>
           </ModalContent>
@@ -191,25 +241,80 @@ const Card = ({ domain, type, redirect, id, index }: Props) => {
       {editIsOpen && (
         <Modal isOpen={editIsOpen} onClose={editOnClose}>
           <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Edit Redirect for {domain}</ModalHeader>
+          <ModalContent
+            h={'max-content'}
+            bg={'#141417'}
+            boxShadow={'0px 4px 96px 0px rgba(0, 0, 0, 0.24)'}
+            backdropFilter={'blur(20px)'}
+            border={'1px solid rgba(105, 92, 255, 0.08)'}
+          >
+            <ModalHeader color={'white'}>Edit Redirect</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Input
-                onChange={(e) => {
-                  setRedirectUrl(e.target.value);
-                }}
-                placeholder="Redirect URL"
-              />
+              <HStack justify={'start'} gap={7} mb={7}>
+                <VStack gap={'0px'} spacing={'0'} align={'start'}>
+                  <Text
+                    fontSize={'xs'}
+                    color={'#78787F'}
+                    textTransform={'uppercase'}
+                  >
+                    Domain Name
+                  </Text>
+                  <Text p={0} fontSize={'md'} color={'white'}>
+                    {domain}
+                  </Text>
+                </VStack>
+                <VStack gap={'0px'} spacing={'0'} align={'start'}>
+                  <Text
+                    fontSize={'xs'}
+                    color={'#78787F'}
+                    textTransform={'uppercase'}
+                  >
+                    Provider
+                  </Text>
+                  <Text p={0} fontSize={'md'} color={'white'}>
+                    SNS
+                  </Text>
+                </VStack>
+              </HStack>
+              <VStack gap={1} align={'start'}>
+                <Text
+                  textTransform={'uppercase'}
+                  color={'#78787F'}
+                  fontSize={'sm'}
+                >
+                  destination link
+                </Text>
+                <Input
+                  border={'1px solid #78787F'}
+                  value={redirectUrl}
+                  color={'white'}
+                  onChange={(e) => {
+                    setRedirectUrl(e.target.value);
+                  }}
+                  placeholder="Redirect URL"
+                />
+              </VStack>
             </ModalBody>
 
             <ModalFooter>
               <Button
+                color={'#78787F'}
+                _hover={{
+                  bg: 'transparent',
+                  color: '#78787F',
+                }}
+                variant="ghost"
+                onClick={editOnClose}
+              >
+                Close
+              </Button>
+              <Button
                 mr={3}
-                bg={'#05386B'}
+                bg={'#695CFF'}
                 color={'white'}
                 _hover={{
-                  bg: '#05386B',
+                  bg: '#695CFF',
                   color: '#FFFFFF',
                 }}
                 isLoading={updateRedirectMutation.isLoading}
@@ -221,10 +326,7 @@ const Card = ({ domain, type, redirect, id, index }: Props) => {
                   });
                 }}
               >
-                Update
-              </Button>
-              <Button variant="ghost" onClick={editOnClose}>
-                Close
+                Update Link
               </Button>
             </ModalFooter>
           </ModalContent>
