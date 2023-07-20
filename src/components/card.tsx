@@ -1,4 +1,4 @@
-import { EditIcon } from '@chakra-ui/icons';
+import { AddIcon, EditIcon } from '@chakra-ui/icons';
 import {
   Box,
   Button,
@@ -105,7 +105,23 @@ const Card = ({ domain, type, redirect, id, index }: Props) => {
               </Flex>
             </>
           ) : (
-            <Text>{'No redirect yet'}</Text>
+            <>
+              <Button
+                onClick={() => {
+                  onOpen();
+                }}
+                _hover={{
+                  bg: '#695CFF',
+                  color: '#FFFFFF',
+                }}
+                leftIcon={<AddIcon />}
+                bg={'#695CFF'}
+                fontWeight={400}
+                color={'white'}
+              >
+                Add redirect link
+              </Button>
+            </>
           )}
         </Td>
         {/* <Td>
@@ -133,7 +149,7 @@ const Card = ({ domain, type, redirect, id, index }: Props) => {
 
         <Td>
           {!redirect ? (
-            <Text color={'white'}>--</Text>
+            <>--</>
           ) : (
             <>
               <EditIcon
@@ -197,6 +213,7 @@ const Card = ({ domain, type, redirect, id, index }: Props) => {
                   destination link
                 </Text>
                 <Input
+                  color={'white'}
                   border={'1px solid #78787F'}
                   onChange={(e) => {
                     setRedirectUrl(e.target.value);
