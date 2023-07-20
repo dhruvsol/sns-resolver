@@ -44,7 +44,7 @@ linear-gradient(180deg, rgba(105, 92, 255, 0) 0%, rgba(105, 92, 255, 0.04) 100%)
           <Flex gap={3}>
             <Image width={55} height={55} src={Logo} alt="logo" />
             <Text fontWeight={700} fontSize="lg" color="white">
-              SOL <br /> RESOLVER
+              SNS <br /> RESOLVER
             </Text>
           </Flex>
         </Link>
