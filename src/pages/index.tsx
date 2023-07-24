@@ -184,10 +184,9 @@ const Home: NextPage = () => {
                       background: '#695CFF',
                       width: '100%',
                       height: '100%',
+                      zIndex: 100,
                     }}
-                  >
-                    Get Started
-                  </WalletMultiButton>
+                  ></WalletMultiButton>
                 )}
               </Flex>
             </Flex>

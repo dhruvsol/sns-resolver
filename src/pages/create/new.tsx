@@ -122,7 +122,7 @@ const Create: NextPage = () => {
               </defs>
             </svg>
           </Center>
-          <Container maxW="7xl">
+          <Container position={'relative'} maxW="7xl">
             <Text
               color="white"
               fontFamily={'Poppins'}
@@ -232,7 +232,7 @@ const Create: NextPage = () => {
               </defs>
             </svg>
           </Center>
-          <Container maxW="7xl">
+          <Container position={'relative'} maxW="7xl">
             <Text
               color="white"
               fontFamily={'Poppins'}
@@ -349,6 +349,7 @@ const Create: NextPage = () => {
             w={'full'}
             pt={32}
             flexDir={'column'}
+            position={'relative'}
           >
             <Flex>
               <svg

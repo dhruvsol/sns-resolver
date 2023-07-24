@@ -66,7 +66,7 @@ const Card = ({ domain, type, redirect, id, index }: Props) => {
   } = useDisclosure();
   return (
     <>
-      <Tr>
+      <Tr position={'relative'}>
         <Td>
           <Text color={'white'}>{domain}</Text>
         </Td>
